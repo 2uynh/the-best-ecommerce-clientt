@@ -9,26 +9,10 @@
     width: 100%;
 }
 
-.header .top_header {
-    max-width: 100%;
-    display: flex;
-    padding: 10px 10px;
-    background: #f6f7f8;
-}
-
-.header .top_header .icon {
-    margin-left: 20px;
-    color: #ababab;
-    font-size: 19px;
-}
-
-.header .top_header .info p {
-    margin-left: 10px;
-    color: #8a8a8a;
-}
 
 .header .mid_header {
     display: flex;
+    align-items: center; /* Vertically center items */
     padding: 20px 40px;
     max-width: 100%;
     justify-content: space-between;
@@ -38,56 +22,23 @@
     cursor: pointer;
     object-fit: cover;
     width: 200px;
-    margin-left: -20px;
-}
-
-.header .mid_header .search_box input {
-    padding: 10px 10px;
-    outline: none;
-    background: none;
-    border-top-left-radius: 5px;
-    border-bottom-left-radius: 5px;
-    width: 250px;
-    border: none;
-    /*border: 1px solid #8a8a8a;*/
-    background: #f6f7f8;
-}
-
-.header .mid_header .search_box button {
-    padding: 10px 10px;
-    border-top-right-radius: 5px;
-    border-bottom-right-radius: 5px;
-    border: none;
-    outline: none;
-    /* border: 1px solid #008cd6; */
-    width: 50px;
-    background: #008cd6;
-    color: #fff;
-    cursor: pointer;
-    margin-right: 30px;
-    transition: 0.5s;
-}
-
-.header .mid_header .search_box button:hover {
-    background: #9ed8f6;
-    /* border: 1px solid #9ed8f6; */
-    color: #008cd6;
+    /* Remove the left margin to avoid any misalignment */
+    margin-left: 0;
 }
 
 .header .mid_header .user {
     display: flex;
     align-items: center;
-    gap: 20px; /* Khoảng cách giữa 2 nút */
-    margin-right: 20px;
+    gap: 20px; /* Maintain gap between buttons and info */
     position: absolute;
     right: 20px;
-    top: 10px;
+    top: 25px;
 }
 
 .header .mid_header .user .btn {
     display: flex;
     align-items: center;
-    gap: 5px; /* Giảm khoảng cách giữa icon và chữ */
+    gap: 5px;
 }
 
 .header .mid_header .user .btn button {
@@ -98,10 +49,6 @@
     cursor: pointer;
     padding: 5px 10px;
     transition: 0.3s ease;
-    display: flex;
-    align-items: center;
-    gap: -122px; /* Giúp icon và chữ gần nhau hơn */
-    white-space: nowrap;
 }
 
 .header .mid_header .user .btn button:hover {
@@ -134,7 +81,7 @@
 
 .header .last_header .nav {
     margin-top: 15px;
-    margin-left: 20%;
+    margin-left: 32%;
 }
 
 .header .last_header .nav ul {
@@ -166,7 +113,7 @@
 }
 
 .header .last_header .offer p {
-    margin-top: 8px;
+    margin-top: 5px;
     text-transform: uppercase;
     color: #232323;
     font-weight: 600;

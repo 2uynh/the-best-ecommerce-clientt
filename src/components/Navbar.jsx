@@ -1,6 +1,4 @@
 import React from "react";
-import { MdLocalShipping } from "react-icons/md";
-import { FaUserCircle } from "react-icons/fa";
 import { Link, useNavigate } from "react-router-dom";
 import { Dropdown, Menu } from "antd";
 import "./nav.css";
@@ -14,12 +12,26 @@ const NavBar = () => {
   const handleLogout = () => {
     localStorage.removeItem("user");
     localStorage.removeItem("token");
-    window.location.href = '/'
+    window.location.href = "/";
+  };
+
+  const handleViewProfile = () => {
+    if (!user) return;
+
+    if (user.role === "admin") {
+      navigate("/dashboard"); 
+    } else {
+      navigate("/profile"); 
+    }
   };
 
   const menu = (
     <Menu
       items={[
+        {
+          key: "profile",
+          label: <span onClick={handleViewProfile}>Xem trang cá nhân</span>,
+        },
         {
           key: "logout",
           label: <span onClick={handleLogout}>Đăng xuất</span>,
@@ -30,15 +42,6 @@ const NavBar = () => {
 
   return (
     <div className="header">
-      <div className="top_header">
-        <div className="icon">
-          <MdLocalShipping />
-        </div>
-        <div className="info">
-          <p>Miễn phí vận chuyển cho đơn hàng ĐẠT 399K</p>
-        </div>
-      </div>
-
       <div className="mid_header">
         <div className="logo">
           <img src="image/logo.png" alt="logo" />
@@ -69,11 +72,6 @@ const NavBar = () => {
       </div>
 
       <div className="last_header">
-        <div className="user_profile">
-          <div className="icon">
-            <FaUserCircle />
-          </div>
-        </div>
         <div className="nav">
           <ul>
             <li><Link to="/" className="link">Trang chủ</Link></li>

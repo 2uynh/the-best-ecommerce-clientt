@@ -9,6 +9,7 @@ import Login from "../pages/auth/login";
 import Register from '../pages/auth/register';
 
 import AdminDashboard from "../pages/admin/dashboard";
+import UserProfile from "../pages/customers/profile";
 
 import NotFound from "../pages/notfound";
 import ProtectedRoute from "../routes/ProtectedRoute";
@@ -36,6 +37,17 @@ const AppRoutes = () => {
           </ProtectedRoute>
         }
       />
+
+      <Route
+        path="/profile"
+        element={
+          <ProtectedRoute allowedRoles={["user"]}>
+            <UserProfile />
+          </ProtectedRoute>
+        }
+      />
+
+
 
       <Route path="*" element={<NotFound />} />
     </Routes>
