@@ -14,6 +14,9 @@ import UserProfile from "../pages/customers/profile";
 import NotFound from "../pages/notfound";
 import ProtectedRoute from "../routes/ProtectedRoute";
 import CustomerLayout from "../layouts/CustomerLayout";
+import AdminLayout from "../layouts/AdminLayout";
+import CategoryList from "../pages/admin/categories";
+import ProductList from "../pages/admin/products";
 
 const AppRoutes = () => {
   const token = localStorage.getItem("token");
@@ -28,15 +31,12 @@ const AppRoutes = () => {
         <Route path="/product" element={<Product />} />
         <Route path="/contact" element={<Contact />} />
       </Route>
-
-      <Route
-        path="/dashboard"
-        element={
-          <ProtectedRoute allowedRoles={["admin"]}>
-            <AdminDashboard />
-          </ProtectedRoute>
-        }
-      />
+      
+      <Route path="/admin" element={<ProtectedRoute allowedRoles={["admin"]}><AdminLayout /></ProtectedRoute>}>
+        <Route path="dashboard" element={<AdminDashboard />} />
+        <Route path="categories" element={<CategoryList />} />
+        <Route path="products" element={<ProductList />} />
+      </Route>
 
       <Route
         path="/profile"
