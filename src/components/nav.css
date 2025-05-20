@@ -9,10 +9,29 @@
     width: 100%;
 }
 
+/* Căn giữa menu dropdown nếu muốn chỉnh thêm */
+.ant-dropdown-menu {
+    
+    text-align: center;
+  }
+  
+  /* Tuỳ chỉnh item bên trong menu */
+  .ant-dropdown-menu-item {
+    font-size: 14px;
+    padding: 8px 16px;
+  }
+  
+  /* Hiệu ứng hover */
+  .ant-dropdown-menu-item:hover {
+    background-color: #f0f0f0;
+    color: #007bff;
+  }
+  
+
 
 .header .mid_header {
     display: flex;
-    align-items: center; /* Vertically center items */
+    align-items: center; 
     padding: 20px 40px;
     max-width: 100%;
     justify-content: space-between;
@@ -22,18 +41,55 @@
     cursor: pointer;
     object-fit: cover;
     width: 200px;
-    /* Remove the left margin to avoid any misalignment */
     margin-left: 0;
 }
 
 .header .mid_header .user {
     display: flex;
     align-items: center;
-    gap: 20px; /* Maintain gap between buttons and info */
+    gap: 20px; 
     position: absolute;
     right: 20px;
-    top: 25px;
+    top: 30px;
+    padding-right: 30px;
 }
+
+.search-container {
+  margin-left: 30px;
+  flex: 1;
+  margin-left: 20%;
+}
+
+.search-input {
+  width: 50%;
+  padding: 8px 12px;;
+  border: 1px solid #ccc;
+  border-radius: 10px;
+}
+
+.search-results {
+  position: absolute;
+  background: #fff;
+  border: 1px solid #ccc;
+  width: 100%;
+  max-height: 200px;
+  overflow-y: auto;
+  z-index: 999;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.search-results li {
+  padding: 8px 12px;
+  cursor: pointer;
+}
+
+.search-results li:hover {
+  background-color: #f0f0f0;
+}
+
+
 
 .header .mid_header .user .btn {
     display: flex;
@@ -89,11 +145,14 @@
 }
 
 .header .last_header .nav ul li {
+    padding-bottom: 10px;
+    padding-left: 20px;
     list-style: none;
 }
 
 .header .last_header .nav ul li .link {
-    margin-right: 20px;
+    
+    margin-right: 25px;
     text-decoration: none;
     color: #fff;
     font-weight: 600;

@@ -9,10 +9,11 @@ const AdminLayout = () => {
     ? JSON.parse(localStorage.getItem("user"))
     : {};
 
-  const handleLogout = () => {
-    localStorage.clear();
-    navigate("/login");
-  };
+    const handleLogout = () => {
+      localStorage.removeItem("user");
+      localStorage.removeItem("token");
+      window.location.href = "/";
+    };
 
   const goHome = () => {
     navigate("/");
@@ -35,12 +36,6 @@ const AdminLayout = () => {
           </li>
           <li>
             <Link to="/admin/customers">Quản lý khách hàng</Link>
-          </li>
-          <li>
-            <Link to="/admin/coupons">Quản lý mã khuyến mãi</Link>
-          </li>
-          <li>
-            <Link to="/admin/reports">Báo cáo & thống kê</Link>
           </li>
         </ul>
 

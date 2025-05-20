@@ -71,9 +71,9 @@
 
 .contact .container .form button {
     margin-top: 20px;
-    margin-left: auto;   /* bỏ lề trái cố định */
-    margin-right: auto;  /* thêm lề phải tự động */
-    display: block;      /* chuyển button thành block để căn giữa */
+    margin-left: auto;   
+    margin-right: auto;   
+    display: block;       
     padding: 10px 30px;
     color: #232323;
     border: none;

@@ -10,13 +10,14 @@ function Register() {
   const [name, setName] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
+  const [email, setEmail] = useState ("");
 
   const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    if (!username || !password || !name || !confirmPassword) {
+    if (!username || !password || !name || !confirmPassword || !email) {
       toast.warning("Vui lòng nhập đầy đủ thông tin!");
       return;
     }
@@ -29,6 +30,7 @@ function Register() {
     try {
       const response = await authApi.register({
         name,
+        email,
         username,
         password,
         role: "customer",
@@ -114,6 +116,17 @@ function Register() {
                   placeholder="Nhập lại mật khẩu"
                   value={confirmPassword}
                   onChange={(e) => setConfirmPassword(e.target.value)}
+                />
+              </div>
+
+              <div className="input-label">Địa chỉ Email</div>
+              <div className="input-group">
+                <FaUser className="icon" />
+                <input
+                  type="text"
+                  placeholder="Nhập email"
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
                 />
               </div>
 

@@ -1,13 +1,17 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { Dropdown, Menu } from "antd";
+import { FaUserCircle } from "react-icons/fa";
 import "./nav.css";
 
-const NavBar = () => {
+const NavBar = ({ products }) => {
   const navigate = useNavigate();
   const user = localStorage.getItem("user")
     ? JSON.parse(localStorage.getItem("user"))
     : null;
+
+  const [query, setQuery] = useState("");
+  const [filteredProducts, setFilteredProducts] = useState([]);
 
   const handleLogout = () => {
     localStorage.removeItem("user");
@@ -17,12 +21,18 @@ const NavBar = () => {
 
   const handleViewProfile = () => {
     if (!user) return;
-
     if (user.role === "admin") {
-      navigate("/dashboard"); 
+      navigate("/admin/dashboard");
     } else {
-      navigate("/profile"); 
+      navigate("/profile");
     }
+  };
+
+
+  const handleSelectProduct = (productId) => {
+    setQuery("");
+    setFilteredProducts([]);
+    navigate(`/product/${productId}`);
   };
 
   const menu = (
@@ -44,13 +54,31 @@ const NavBar = () => {
     <div className="header">
       <div className="mid_header">
         <div className="logo">
-          <img src="image/logo.png" alt="logo" />
+          <img src="image/logo_1.png" alt="logo" />
         </div>
+
 
         <div className="user">
           {user ? (
-            <Dropdown overlay={menu} placement="bottomRight" trigger={["hover"]}>
-              <span style={{ cursor: "pointer", fontWeight: "bold" }}>
+            <Dropdown
+              overlay={menu}
+              placement="bottomCenter"
+              trigger={["hover"]}
+              dropdownAlign={{
+                points: ["tc", "bc"],
+                offset: [10, 0],
+              }}
+            >
+              <span
+                style={{
+                  cursor: "pointer",
+                  fontWeight: "bold",
+                  display: "flex",
+                  alignItems: "center",
+                  gap: "8px",
+                }}
+              >
+                <FaUserCircle size={20} />
                 {user.name}
               </span>
             </Dropdown>
@@ -79,9 +107,6 @@ const NavBar = () => {
             <li><Link to="/cart" className="link">Giỏ hàng</Link></li>
             <li><Link to="/contact" className="link">Liên hệ</Link></li>
           </ul>
-        </div>
-        <div className="offer">
-          <p>Giảm 15% cho tất cả MACBOOK</p>
         </div>
       </div>
     </div>

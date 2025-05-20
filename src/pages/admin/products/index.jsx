@@ -92,9 +92,9 @@ const ProductList = () => {
     { title: "Tên", dataIndex: "name", key: "name" },
     {
       title: "Giá",
-      dataIndex: "price",
+      dataIndex: "price",  
       key: "price",
-      render: (value) => formatPriceVND(value),
+      render: (value) => formatPriceVND(value),  
     },
     {
       title: "Danh mục",
@@ -119,7 +119,7 @@ const ProductList = () => {
         </Space>
       ),
     },
-  ];
+  ];  
 
   return (
     <div className="p-4">

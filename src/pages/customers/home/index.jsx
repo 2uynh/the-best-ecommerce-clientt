@@ -1,30 +1,54 @@
 import React, { useEffect, useState } from "react";
 import "./home.css";
 import { Link } from "react-router-dom";
-import { FaEye, FaHeart, FaFacebook } from "react-icons/fa";
+import { FaFacebook } from "react-icons/fa";
 import { BiLogoGmail } from "react-icons/bi";
 import { SiZalo } from "react-icons/si";
 import productApi from "../../../services/products";
+import { toast } from "react-toastify";
+import cartApi from "../../../services/cart";
+import { formatPriceVND } from "../../../utils/formatPriceVND";
+import { message } from "antd";
 
 const Home = () => {
-  const addtocart = () => {};
   const [trendingProduct, setTrendingProduct] = useState([]);
   const [allProducts, setAllProducts] = useState([]);
+  const user = localStorage.getItem("user")
+    ? JSON.parse(localStorage.getItem("user"))
+    : {};
 
   const fetchProducts = async () => {
     try {
       const response = await productApi.getFeatured();
       const data = response.data;
-console.log(data)
+      console.log(data);
       setAllProducts(data);
-      setTrendingProduct(data)
+      setTrendingProduct(data);
     } catch (error) {
       console.error("Failed to fetch products", error);
     }
   };
 
+  const handleAddToCart = async (product) => {
+    if (!user?.id || !product?._id) {
+      return message.error("Vui lòng đăng nhập để thêm sản phẩm vào giỏ");
+    }
+    try {
+      await cartApi.addToCart({
+        user_id: user.id,
+        product_id: product._id,
+        quantity: 1,
+      });
+      message.success("Đã thêm vào giỏ hàng!");
+    } catch (error) {
+      message.error("Đã xảy ra lỗi");
+    }
+  };
+
   const filtercate = (type) => {
-    const filtered = allProducts.filter((product) => product.featured_type === type);
+    const filtered = allProducts.filter(
+      (product) => product.featured_type === type
+    );
     setTrendingProduct(filtered);
   };
 
@@ -38,13 +62,12 @@ console.log(data)
 
   return (
     <div className="home">
-      {/* giữ nguyên toàn bộ giao diện, chỉ sửa đoạn map trendingProduct */}
       <div className="top_banner">
         <div className="contant">
-          <h3>TƯNG BỪNG SALE</h3>
-          <h2>M1 MACBOOK AIR</h2>
-          <p>Giảm 30% cho đơn hàng đầu tiên của bạn</p>
-          <Link to="/shop" className="link">
+          <h3>NHANH TAY MUA NGAY</h3>
+          <h2>MACBOOK AIR M2</h2>
+          <p>Mua thông minh - giá luôn xinh</p>
+          <Link to="/product" className="link">
             MUA NGAY
           </Link>
         </div>
@@ -70,26 +93,21 @@ console.log(data)
                   <div className="box" key={curElm._id}>
                     <div className="img_box">
                       <img src={curElm.image} alt="" />
-                      <div className="icon">
-                        <div className="icon_box">
-                          <FaEye />
-                        </div>
-                        <div className="icon_box">
-                          <FaHeart />
-                        </div>
-                      </div>
                     </div>
                     <div className="info">
                       <h3>{curElm.name}</h3>
-                      <p>{curElm.price}đ</p>
-                      <button className="btn" onClick={() => addtocart(curElm)}>
+                      <p>{formatPriceVND(curElm.price)}</p>
+                      <button
+                        className="btn"
+                        onClick={() => handleAddToCart(curElm)}
+                      >
                         Thêm vào giỏ
                       </button>
                     </div>
                   </div>
                 ))}
               </div>
-              <Link to="/shop">
+              <Link to="/product">
                 <button>Hiển thị thêm</button>
               </Link>
             </div>
@@ -106,37 +124,16 @@ console.log(data)
                     <img src="image/avatar.jpg" alt="testmonial" />
                   </div>
                   <div className="info">
-                    <h3>Võ Anh Quốc</h3>
-                    <h4>Giám Đốc</h4>
+                    <h3>Phạm Hoàng Mãi</h3>
+                    <h4>Giám Đốc Điều Hành</h4>
                     <p>
-                      Người Hỗ trợ & chịu trách nhiệm đối với Ánh Nguyệt
+                      Người Hỗ trợ & chịu trách nhiệm đối với Trường Thịnh
                       Computer
                     </p>
                   </div>
                 </div>
               </div>
 
-              <div className="newsletter">
-                <div className="head">
-                  <h3>Liên hệ</h3>
-                </div>
-                <div className="form">
-                  <p>Nhập số điện thoại hoặc email của bạn để được hỗ trợ!</p>
-                  <input type="email" placeholder="E-mail" autoComplete="off" />
-                  <button>Gửi</button>
-                  <div className="icon_box">
-                    <div className="icon">
-                      <FaFacebook />
-                    </div>
-                    <div className="icon">
-                      <BiLogoGmail />
-                    </div>
-                    <div className="icon">
-                      <SiZalo />
-                    </div>
-                  </div>
-                </div>
-              </div>
             </div>
           </div>
         </div>

@@ -41,11 +41,16 @@ const ProductFormModal = ({ visible, onCancel, onOk, initialValues }) => {
 
   const handleSubmit = () => {
     form.validateFields().then((values) => {
-      onOk({ ...values, image: imageUrl });
+      onOk({
+        ...values,
+        image: imageUrl,
+        price_sale: values.price_sale || null, 
+      });
       form.resetFields();
       setImageUrl("");
     });
   };
+  
 
   const handleUpload = async (file) => {
     const formData = new FormData();

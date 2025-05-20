@@ -31,7 +31,7 @@ function Login() {
       if (user) localStorage.setItem('user', JSON.stringify(user));
 
       if (user?.role === 'admin') {
-        return navigate("/dashboard");
+        return navigate("/admin/dashboard");
       }
 
       navigate('/');
@@ -94,7 +94,6 @@ function Login() {
                 Đăng nhập <span className="arrow">→</span>
               </button>
 
-              <p className="forgot-password"><a href="#">Quên mật khẩu?</a></p>
             </form>
           </div>
         </div>

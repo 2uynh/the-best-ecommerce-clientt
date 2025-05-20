@@ -1,5 +1,6 @@
 import axios from "axios";
-import queryString from "qs";
+import queryString from 'query-string';
+
 
 const API_BASE_URL = process.env.REACT_APP_URL_API;
 
